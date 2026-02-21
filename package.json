@@ -1,5 +1,6 @@
 {
   "name": "convolution-visulizer",
+  "deploy": "npm run build && gh-pages -d dist"
   "private": true,
   "version": "0.0.0",
   "type": "module",
