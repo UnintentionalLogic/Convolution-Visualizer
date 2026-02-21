@@ -245,6 +245,8 @@ export default function ConvolutionDemo() {
       onTouchEnd={handleTouchEnd} onDragEnd={()=>{setDragging(null);setOverX(false);setOverH(false);}}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
       <style>{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body, #root { background: ${C.bg}; min-height: 100vh; }
         input[type="range"]{-webkit-appearance:none;appearance:none;background:${C.indigo};border-radius:4px;height:5px;outline:none}
         input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:${C.accent};border:2px solid ${C.bg};cursor:pointer;box-shadow:0 0 12px ${C.accent}40}
         input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:${C.accent};border:2px solid ${C.bg};cursor:pointer}
@@ -305,17 +307,17 @@ export default function ConvolutionDemo() {
       </div>
 
       {/* 2-column grid */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,width:"100%",maxWidth:GRID_W}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,width:"100%",maxWidth:GRID_W,alignItems:"stretch"}}>
 
         {/* Row 1: Original x(t) | Original h(t) */}
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title={discrete?"x[n]":"x(t)"} xLabel={discrete?"n":"t"}
             data={discrete?[{points:[]}]:[{points:xOrigC}]}
             stemData={discrete?[{points:xOrigD}]:undefined}
             discrete={discrete} colors={[C.xSig]} yMin={origXYMin} yMax={origXYMax}
             legend={[L(C.xSig,`━ ${discrete?SIGNALS[xKey].labelD:SIGNALS[xKey].label}`)]}/>
         </div>
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title={discrete?"h[n]":"h(t)"} xLabel={discrete?"n":"t"}
             data={discrete?[{points:[]}]:[{points:hOrigC}]}
             stemData={discrete?[{points:hOrigD}]:undefined}
@@ -324,14 +326,14 @@ export default function ConvolutionDemo() {
         </div>
 
         {/* Row 2: Sliding view | Integrand */}
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title={discrete?"x[k] and h[n−k]":"x(τ) and h(t−τ)"} xLabel={discrete?"k":"τ"}
             data={discrete?[{points:[]},{points:[]}]:[{points:xTauC},{points:hFlipC}]}
             stemData={discrete?[{points:xStemD},{points:hFlipD}]:undefined}
             discrete={discrete} colors={[C.xSig,C.hSig]} yMin={slideYMin} yMax={slideYMax}
             legend={[L(C.xSig,discrete?"━ x[k]":"━ x(τ)"),L(C.hSig,discrete?"━ h[n−k]":"━ h(t−τ)")]}/>
         </div>
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title="Integrand" xLabel={discrete?"k":"τ"}
             data={discrete?[{points:[]}]:[{points:prodC}]}
             stemData={discrete?[{points:prodD}]:undefined}
@@ -341,7 +343,7 @@ export default function ConvolutionDemo() {
         </div>
 
         {/* Row 3: Result | Combined */}
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title={discrete?"Result · y[n]":"Result · y(t)"} xLabel={discrete?"n":"t"}
             data={discrete?[{points:[]}]:[{points:yDrawnC}]}
             stemData={discrete?[{points:yDrawnD}]:undefined}
@@ -350,7 +352,7 @@ export default function ConvolutionDemo() {
             yMin={resYMin} yMax={resYMax}
             legend={[L(C.result,discrete?"━ y[n]":"━ y(t)")]}/>
         </div>
-        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px"}}>
+        <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 12px 4px",display:"flex",flexDirection:"column"}}>
           <Chart title="Combined View" xLabel={discrete?"n / k":"t / τ"}
             data={discrete?[{points:[]},{points:[]},{points:[]},{points:[]}]:[{points:xTauC},{points:hFlipC},{points:prodC},{points:yDrawnC}]}
             stemData={discrete?[{points:xStemD},{points:hFlipD},{points:prodD},{points:yDrawnD}]:undefined}
