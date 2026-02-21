@@ -260,7 +260,7 @@ export default function ConvolutionDemo() {
 
       {/* Chip tray */}
       <div style={{background:`${C.card}90`,border:`1px solid ${C.cardBord}60`,borderRadius:3,padding:"10px 16px",marginBottom:8,width:"100%",maxWidth:GRID_W}}>
-        <div style={{fontSize:13,color:C.lavender,marginBottom:6,fontWeight:600}}>Drag a signal into x(t) or h(t) — or tap to assign</div>
+        <div style={{fontSize:13,color:C.lavender,marginBottom:6,fontWeight:800}}>Drag a signal into x(t) or h(t)</div>
         <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
           {SIGNAL_KEYS.map(k=>(<SignalChip key={k} sigKey={k} discrete={discrete} isDragging={dragging===k||touchDrag===k}
             onDragStart={setDragging} onTouchStart={setTouchDrag}
